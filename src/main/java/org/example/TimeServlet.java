@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
@@ -15,7 +16,11 @@ public class TimeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String timezone = req.getParameter("timezone");
+        String timezone = req.getQueryString();
+        timezone = timezone.substring(9,timezone.length());
+
+        URLDecoder.decode(timezone);
+
 
         if (timezone == null){
             timezone = "UTC";
